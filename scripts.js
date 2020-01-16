@@ -1,15 +1,17 @@
 let Sort = (function() {
-  var dataTable = document.querySelector(".data-table");
-  var sorters = dataTable.querySelectorAll("[data-sort]");
-  var defaultSort = document.querySelector("[data-defaultSort]");
+  const dataTable = document.querySelector(".data-table");
+  const sorters = dataTable.querySelectorAll("[data-sort]");
+  const defaultSort = document.querySelector("[data-defaultsort]");
+  const DEF_ASC =
+    dataTable.dataset.defaultorder.toLowerCase() === "asc" ? true : false;
 
   var lastClicked = {};
-  var isAscending = false;
+  var isAscending = DEF_ASC;
 
   function sortTable() {
     if (this !== lastClicked) {
       lastClicked = this;
-      isAscending = false;
+      isAscending = DEF_ASC;
       cleanSorters();
     } else {
       isAscending = !isAscending;
@@ -20,18 +22,20 @@ let Sort = (function() {
 
   function showArrow(el, asc) {
     const arrow = document.createElement("i");
-    arrow.id = "order";
-    arrow.innerHTML = asc ? "up" : "down";
-    if (el.querySelector("#order")) {
-      el.removeChild(el.querySelector("#order"));
+    arrow.classList.add("order");
+    arrow.innerHTML = asc ? "&#8595;" : "&#8593;";
+    if (el.querySelector(".order")) {
+      el.removeChild(el.querySelector(".order"));
     }
     el.append(arrow);
+    el.style.fontWeight = "bold";
   }
 
   function cleanSorters() {
     sorters.forEach(sorter => {
-      if (sorter.querySelector("#order")) {
-        sorter.removeChild(sorter.querySelector("#order"));
+      if (sorter.querySelector(".order")) {
+        sorter.removeChild(sorter.querySelector(".order"));
+        sorter.style.fontWeight = "normal";
       }
     });
   }
