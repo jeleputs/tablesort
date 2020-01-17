@@ -44,6 +44,20 @@ let Sort = (function() {
     const arrangeBy = el.cellIndex;
     const table = document.querySelector(".data-content");
     const sortedRows = Array.from(table.rows).sort((a, b) => {
+      if (
+        a.cells[arrangeBy].innerText.length < 1 ||
+        parseFloat(a.cells[arrangeBy].innerText) < 1 ||
+        isNaN(parseFloat(a.cells[arrangeBy].innerText))
+      ) {
+        return 1;
+      }
+      if (
+        b.cells[arrangeBy].innerText.length < 1 ||
+        parseFloat(b.cells[arrangeBy].innerText) < 1 ||
+        isNaN(parseFloat(b.cells[arrangeBy].innerText))
+      ) {
+        return -1;
+      }
       if (asc === true) {
         return a.cells[arrangeBy].innerText.toLowerCase() >
           b.cells[arrangeBy].innerText.toLowerCase()
