@@ -42,53 +42,22 @@ let Sort = (function() {
 
   function arrangeRows(el, asc) {
     const arrangeBy = el.cellIndex;
-
-    var table, rows, switching, i, a, b, shouldSwitch;
-    table = document.querySelector(".data-content");
-    switching = true;
-    /* Make a loop that will continue until
-  no switching has been done: */
-    while (switching) {
-      // Start by saying: no switching is done:
-      switching = false;
-      rows = table.rows;
-      /* Loop through all table rows (except the
-    first, which contains table headers): */
-      for (i = 0; i < rows.length - 1; i++) {
-        // Start by saying there should be no switching:
-        shouldSwitch = false;
-        /* Get the two elements you want to compare,
-      one from current row and one from the next: */
-        a = rows[i];
-        b = rows[i + 1];
-        // Check if the two rows should switch place:
-        if (asc === true) {
-          if (
-            a.cells[arrangeBy].innerText.toLowerCase() >
-            b.cells[arrangeBy].innerText.toLowerCase()
-          ) {
-            // If so, mark as a switch and break the loop:
-            shouldSwitch = true;
-            break;
-          }
-        } else {
-          if (
-            a.cells[arrangeBy].innerText.toLowerCase() <=
-            b.cells[arrangeBy].innerText.toLowerCase()
-          ) {
-            // If so, mark as a switch and break the loop:
-            shouldSwitch = true;
-            break;
-          }
-        }
+    const table = document.querySelector(".data-content");
+    const sortedRows = Array.from(table.rows).sort((a, b) => {
+      if (asc === true) {
+        return a.cells[arrangeBy].innerText.toLowerCase() >
+          b.cells[arrangeBy].innerText.toLowerCase()
+          ? 1
+          : -1;
+      } else {
+        return a.cells[arrangeBy].innerText.toLowerCase() >
+          b.cells[arrangeBy].innerText.toLowerCase()
+          ? -1
+          : 1;
       }
-      if (shouldSwitch) {
-        /* If a switch has been marked, make the switch
-      and mark that a switch has been done: */
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-      }
-    }
+    });
+    table.innerHTML = "";
+    sortedRows.forEach(tr => table.appendChild(tr));
   }
 
   sorters.forEach(sorter => sorter.addEventListener("click", sortTable));
