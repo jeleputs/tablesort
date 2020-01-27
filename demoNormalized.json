@@ -1,0 +1,54 @@
+{
+  "headers": {
+    /*Aqui podemos poner la info de las primeras 3 rows, por ejemplo*/
+  },
+  "meta": {
+    "defaultOrder": "ASC"
+  },
+  "data": {
+    "titles": {
+      "name": {
+        "isDefault": false,
+        "type": "string",
+        "format": "",
+        "alignment": "left",
+        "label": "nombre"
+      },
+      "sevenDayRepeat_Actual": {
+        "isDefault": false,
+        "type": "percentage",
+        "format": ["1", ",", "."],
+        "alignment": "right",
+        "label": "Actual",
+        "suffix": "XD",
+        "prefix": "-",
+        "grupedWithNext": true
+      },
+      "sevenDayRepeat_Rank": {
+        "isDefault": false,
+        "type": "integer",
+        "format": ["1", ",", "."],
+        "alignment": "center",
+        "label": "Rank"
+      }
+    },
+    "content": {
+      "123123": {
+        "name": "Ricardo",
+        "sevenDayRepeat_Actual": 40.3,
+        "sevenDayRepeat_Rank": 3,
+        "rawData": {}
+      },
+      "3123": {
+        "name": "Ricardo",
+        "sevenDayRepeat_Actual": 41.3,
+        "sevenDayRepeat_Rank": 2
+      },
+      "234234": {
+        "name": "Ricardo",
+        "sevenDayRepeat_Actual": 50.19,
+        "sevenDayRepeat_Rank": 1
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ let Sort = (function() {
   var isAscending = DEF_ASC;
 
   function sortTable() {
+    console.time();
     if (this !== lastClicked) {
       lastClicked = this;
       isAscending = DEF_ASC;
@@ -18,6 +19,7 @@ let Sort = (function() {
     }
     showArrow(this, isAscending);
     arrangeRows(this, isAscending);
+    console.timeEnd();
   }
 
   function showArrow(el, asc) {
@@ -75,5 +77,21 @@ let Sort = (function() {
   }
 
   sorters.forEach(sorter => sorter.addEventListener("click", sortTable));
+
+  function fixNav() {
+    const headers = document.querySelector(".data-headers").rows;
+
+    var totalHeight = 0;
+    for (i = 0; i < headers.length; i++) {
+      console.log(headers[i].cells, totalHeight);
+      for (j = 0; j < headers[i].cells.length; j++) {
+        headers[i].cells[j].style.top = `${totalHeight}px`;
+      }
+      console.log(headers[i].offsetHeight);
+      totalHeight += headers[i].offsetHeight;
+    }
+  }
+
+  window.addEventListener("load", fixNav);
   defaultSort.click();
 })();
